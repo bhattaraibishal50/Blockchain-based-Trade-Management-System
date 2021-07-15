@@ -5,58 +5,72 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Trade management system</title>
+  <title>Voting System</title>
   <!-- Bootstrap -->
   <link href="css/bootstrap.min.css" rel="stylesheet">
 
 </head>
+<style>
+.button {
+  background-color: #4CAF50; /* Green */
+}
 
+.button3 {background-color: #f44336;} /* Red */ 
+
+</style>
 <body>
+  <center>
+  <img src="unnamed.png" alt="NEPSE TMS">
+  </center>
   <div class="container">
     <div class="row">
+
+
       <div class="col-12">
-        <h1 class="text-center">Nepse TMS</h1>
+        <h1 class="text-center">Trade Management System</h1>
       </div>
 
-    </div>
-    <div style="position: absolute; top: 10%; right: 0;">
-      <div class="alert toast alert-warning alert-dismissible fade hide" role="alert" data-delay="1000">
-      </div>
     </div>
     <hr />
     <br />
 
     <div class="row">
       <div class="col-12">
-        
-          <input type="text" class="form-control input-value" name="input" placeholder="Place the no of shares to buy" value="">
-          <br />
-          <button type="button" name="button" class="btn btn-primary btn-value">BUY</button>
-        
+        <b><center><p>NLIC stock price : 1200 Rupees </p></center></b>
+        <div class="input-group">
+          <input type="text" class="form-control input-value" name="input" placeholder="Buy Price" value="">
+          <input type="text" class="form-control input-value" name="input" placeholder="Buy Quantity" value="">
+          <div class="input-group-btn">
+            <button type="button" name="button" class="button">Buy
+
+            </button>
+          </div>
+        </div>
       </div>
     </div>
-
+    <hr />
     <br />
+    <div class="row">
+      <div class="col-12">
+        <div class="input-group">
+          <input type="text" class="form-control input-value" name="input" placeholder="Sell Price" value="">
+          <input type="text" class="form-control input-value" name="input" placeholder="Sell Quantity." value="">
+          <div class="input-group-btn">
+            <button type="button" name="button" class="button3" >Sell
+
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
     <hr />
     <br />
 
-    <div class="row">
-    <div class="col-12">
-          <input type="text" class="form-control input-value" name="input" placeholder="Place the no of shares to sell" value="">
-          <br />
-          <button type="button" name="button" class="btn btn-primary btn-value">SELL</button>
-    </div>
-    </div>
 
-    <div id="wrapperProposals">
-    </div>
 
   </div>
 
   
-    <hr />
-    <br />
-  </div>
 
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

@@ -35,8 +35,6 @@ App = {
     return App.bindEvents();
   },
 
-
-
   
 };
 

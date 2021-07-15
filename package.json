@@ -1,0 +1,27 @@
+{
+  "name": "voting-dapp",
+  "version": "0.0.1",
+  "description": "",
+  "main": "truffle.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "dev": "lite-server",
+    "compile": "truffle compile",
+    "migrate": "truffle migrate --reset",
+    "deploy-ropsten": "truffle deploy --network ropsten",
+    "deploy-binance": "truffle deploy --network binance",
+    "deploy-rumsan": "truffle deploy --network rumsanTest --reset"
+  },
+  "author": "",
+  "license": "",
+  "devDependencies": {
+    "lite-server": "^2.6.1"
+  },
+  "dependencies": {
+    "@truffle/hdwallet-provider": "^1.2.2",
+    "dotenv": "^8.2.0",
+    "truffle": "^5.1.43"
+  }
+}
