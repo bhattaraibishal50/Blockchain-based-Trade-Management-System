@@ -1,7 +1,7 @@
 
-pragma solidity ^0.8.1;
+pragma solidity ^0.8.16;
 
-import "erc.sol";
+import "./erc.sol";
 
 contract Token is ERC721 {
     /// @param _name Token Name
