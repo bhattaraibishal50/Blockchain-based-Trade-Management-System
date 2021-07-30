@@ -128,10 +128,11 @@ contract NEPSETMS {
 
 
     function SEBON() public OnlyOwner payable returns (string memory) {
+        require(owner == msg.sender, "Required to be an owner");
         myEvent.isOpen = false;
-        owner.transfer(myEvent.sales * myEvent.SHARE_PRICE);
+        //owner.transfer(myEvent.sales * myEvent.SHARE_PRICE);
 
-        emit LogTransactions(owner, myEvent.sales * myEvent.SHARE_PRICE);
+        //emit LogTransactions(owner, myEvent.sales * myEvent.SHARE_PRICE);
         return "3pm";
     }
 }

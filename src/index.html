@@ -5,18 +5,36 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Voting System</title>
+  <title>Trade Management System NEPSE</title>
   <!-- Bootstrap -->
   <link href="css/bootstrap.min.css" rel="stylesheet">
 
 </head>
 <style>
-.button {
-  background-color: #4CAF50; /* Green */
+.button-buy {
+  background-color: #00A36C; /* Green */
 }
 
-.button3 {background-color: #f44336;} /* Red */ 
+.button-sell {
+  background-color: #f44336;
 
+  } /* Red */ 
+
+.button-sebon {
+  background-color: #00FFFF; /* Skyblue */
+}
+.button-allocate {
+  background-color: #CCCCFF; /* Purple */
+  color:#000000; /* Skyblue */
+}
+.button-watch {
+  background-color: #CCCCFF;
+  color:#000000; /* Purple */
+}
+.form-control{
+border: 2px solid #000000;
+border-radius: 4px;
+}
 </style>
 <body>
   <center>
@@ -31,6 +49,11 @@
       </div>
 
     </div>
+    <div style="position: absolute; top: 10%; right: 0;">
+      <div class="alert toast alert-warning alert-dismissible fade hide" role="alert" data-delay="1000">
+        <strong>Quantity should never be empty.</strong> Please state the quantity of shares. 
+      </div>
+    </div>
     <hr />
     <br />
 
@@ -39,9 +62,9 @@
         <b><center><p>NLIC stock price : 1200 Rupees </p></center></b>
         <div class="input-group">
           <input type="text" class="form-control input-value" name="input" placeholder="Buy Price" value="">
-          <input type="text" class="form-control input-value" name="input" placeholder="Buy Quantity" value="">
+          <input type="text" class="form-control input-value-buy" name="input" placeholder="Buy Quantity" value="">
           <div class="input-group-btn">
-            <button type="button" name="button" class="button">Buy
+            <button type="button" name="button" class="button-buy">Buy
 
             </button>
           </div>
@@ -54,9 +77,9 @@
       <div class="col-12">
         <div class="input-group">
           <input type="text" class="form-control input-value" name="input" placeholder="Sell Price" value="">
-          <input type="text" class="form-control input-value" name="input" placeholder="Sell Quantity." value="">
+          <input type="text" class="form-control input-value-sell" name="input" placeholder="Sell Quantity." value="">
           <div class="input-group-btn">
-            <button type="button" name="button" class="button3" >Sell
+            <button type="button" name="button" class="button-sell" >Sell
 
             </button>
           </div>
@@ -69,6 +92,50 @@
 
 
   </div>
+
+  <div class="row">
+      <div class="col-12">
+          <div class="input-group">
+            <input type="text" class="form-control input-value-portfolio" name="input" placeholder="Porfolio Address" value="">
+            <div class="input-group-btn">
+              <button type="button" name="button" class="button-watch">View Portfolio 
+                </button>
+            </div>
+          </div>
+      </div>
+  </div>
+  <br />
+  <br />
+  <div class = "text-center">
+    <p><b>Portfolio value is : <span class="portfolioValue"></span></b></p>
+  </div>
+
+  <hr />
+  <br />
+
+  <div class="row">
+      <div class="col-12">
+          <div class="input-group">
+            <input type="text" class="form-control input-value-IPO" name="input" placeholder="Allocate IPO" value="">
+            <div class="input-group-btn">
+              <button type="button" name="button" class="button-allocate">Allocate 
+                </button>
+            </div>
+          </div>
+      </div>
+  </div>
+  <br />
+  <hr />
+  <br />
+
+  <center>
+    <button type="button" class="button-sebon">
+      SEBON
+    </button>
+  </center>
+
+  <br />
+  
 
   
 
