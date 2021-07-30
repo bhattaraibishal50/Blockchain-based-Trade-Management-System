@@ -27,7 +27,7 @@ App = {
   initContract: function () {
     $.getJSON("TMS.json", function (data) {
       let abi = data.abi;
-      let contractAddress = '0x1241cdd51637a0923D4186D7Ca8F9Ef686DbECA2';
+      let contractAddress = '0x4B3CAa758Ba86745812AfEedfDc519Afd64C3D92';
       let instance = new web3.eth.Contract(abi, contractAddress);
       App.contracts.Voting = { abi, contractAddress, instance };
     });
