@@ -17,7 +17,7 @@ App = {
       // If no injected web3 instance is detected, fall back to Ganache
       // Only useful in a development environment
       App.networkId = 5777;
-      App.web3Provider = new Web3.providers.HttpProvider("http://127.0.0.1:7545");
+      App.web3Provider = new Web3.providers.HttpProvider("localhost:7545");
     }
     web3 = new Web3(App.web3Provider);
     return App.initContract();
