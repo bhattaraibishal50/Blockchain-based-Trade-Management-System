@@ -19,7 +19,8 @@ App = {
       App.networkId = 5777;
       App.web3Provider = new Web3.providers.HttpProvider("localhost:7545");
     }
-    web3 = new Web3(App.web3Provider);
+    window.web3.currentProvider.enable();
+    web3 = new Web3(window.web3.currentProvider);
     return App.initContract();
   },
 
@@ -29,7 +30,7 @@ App = {
       let abi = data.abi;
       let contractAddress = '0x4B3CAa758Ba86745812AfEedfDc519Afd64C3D92';
       let instance = new web3.eth.Contract(abi, contractAddress);
-      App.contracts.Voting = { abi, contractAddress, instance };
+      App.contracts.TMS= { abi, contractAddress, instance };
     });
     return App.bindEvents();
 
@@ -38,46 +39,38 @@ App = {
   bindEvents: function () {
     $(document).on("click", ".button-buy", async function (e) {
       let $this = $(this);
+      await App.buy_Shares(e);
+      console.log("triggered");
 
-      try {
-        await App.buy_shares(e);
-      } catch (e) {
-
-      }
       
     });
 
     $(document).on("click", ".btn-sell", async function (e) {
       var $this = $(this);
       App.btnLoading($this);
-      try {
-        await App.sell_shares(e);
-      } catch (e) {
+      await App.sell_Shares(e);
 
-      }
+
+
 
 
     });
 
     $(document).on("click", ".button-watch", async function (e) {
       let $this = $(this);
+      await App.Portfolio_value(e);
 
-      try {
-        await App.Portfolio_value(e);
-      } catch (e) {
 
-      }
+
       
     });
 
     $(document).on("click", ".button-allocate", async function (e) {
       let $this = $(this);
+      await App.allocate(e);
 
-      try {
-        await App.allocate(e);
-      } catch (e) {
 
-      }
+
       
     });
 
@@ -96,20 +89,18 @@ App = {
     let instance = App.contracts.TMS.instance;
     let value = $(".input-value-buy").val();
     let account = await App.getAccount();
+
     if (value === "") {
       $(".toast").toast("show");
       return;
     }
+    // console.log(account);
+    let tx = await instance.methods.buyShares(value).send({from:account});
 
-    try {
-      let tx = await instance.methods.buyShares(value).send({ from: account });
-      if (tx.status) {
-        // App.getAllProposals();
-        $(".input-value-buy").val("");
-        }
-      } catch (e) {
-        throw Error(e);
+    if (tx.status) {
+      $(".input-value-buy").val("");
       }
+
 
   },
 
@@ -124,22 +115,20 @@ App = {
       return;
       }
 
-    try {
-      let tx = await instance.methods.sellShares(value).send({ from: account });
-      if (tx.status) {
+    let tx = await instance.methods.sellShares(value).send({ from: account });
+    if (tx.status) {
         // App.getAllProposals();
-        $(".input-value-sell").val("");
-        }
-      } catch (e) {
-        throw Error(e);
+      $(".input-value-sell").val("");
       }
+
   },
 
   Portfolio_value: async function (event) {
     event.preventDefault();
     let instance = App.contracts.TMS.instance;
     let value = $(".input-value-portfolio").val();
-    let data = await instance.methods.Portfoliovalue(value).call();
+    let data = await instance.methods.PortfolioValue(value).call();
+    console.log(data);
     find(".Portfoliovalue").text(data);
 
   },
