@@ -28,7 +28,7 @@ App = {
   initContract: function () {
     $.getJSON("TMS.json", function (data) {
       let abi = data.abi;
-      let contractAddress = '0x4B3CAa758Ba86745812AfEedfDc519Afd64C3D92';
+      let contractAddress = '0x7c9d76B9E8f416847A4baC6691cE867cb71e1e69';
       let instance = new web3.eth.Contract(abi, contractAddress);
       App.contracts.TMS= { abi, contractAddress, instance };
     });
@@ -40,14 +40,14 @@ App = {
     $(document).on("click", ".button-buy", async function (e) {
       let $this = $(this);
       await App.buy_Shares(e);
-      console.log("triggered");
+
 
       
     });
 
-    $(document).on("click", ".btn-sell", async function (e) {
+    $(document).on("click", ".button-sell", async function (e) {
       var $this = $(this);
-      App.btnLoading($this);
+
       await App.sell_Shares(e);
 
 
@@ -67,7 +67,7 @@ App = {
 
     $(document).on("click", ".button-allocate", async function (e) {
       let $this = $(this);
-      await App.allocate(e);
+      await App.IPO(e);
 
 
 
@@ -95,11 +95,22 @@ App = {
       return;
     }
     // console.log(account);
-    let tx = await instance.methods.buyShares(value).send({from:account});
+    //let tx = await instance.methods.buyShares(value).call();
+    // let tx = await instance.methods.buyShares(value).call()
+    // web3.eth.sendTransaction({
+    //   to:'0xf5b733e3E480710F5A05bA82a8aAa974F5fc6D8e', 
+    //   from:account, 
+    //   value:value})
 
-    if (tx.status) {
-      $(".input-value-buy").val("");
-      }
+    // var getData = await instance.methods.buyShares(value);
+    var tx = instance.methods.buyShares(value).send({
+      to:'0xf5b733e3E480710F5A05bA82a8aAa974F5fc6D8e', 
+      from:account, 
+      value: value*10});
+
+    // if (tx.status) {
+    //   $(".input-value-buy").val("");
+    //   }
 
 
   },
@@ -114,12 +125,31 @@ App = {
       $(".toast").toast("show");
       return;
       }
+    console.log("sell");
 
-    let tx = await instance.methods.sellShares(value).send({ from: account });
-    if (tx.status) {
-        // App.getAllProposals();
-      $(".input-value-sell").val("");
-      }
+    // let tx = await instance.methods.sellShares(value).send({ from: account });
+    // if (tx.status) {
+    //     // App.getAllProposals();
+    //   $(".input-value-sell").val("");
+    //   }
+    var tx = instance.methods.sellShares(value).send({
+      to:account, 
+      from:'0xf5b733e3E480710F5A05bA82a8aAa974F5fc6D8e', 
+      value: value*10});
+    // console.log(tx)
+    // let tx = await instance.methods.sellShares(value).call()
+
+  },
+  IPO: async function (event) {
+    event.preventDefault();
+    let instance = App.contracts.TMS.instance;
+    let value = $(".input-value-IPO").val();
+
+    let tx = await instance.methods.Allocate().call();
+
+
+
+
 
   },
 
@@ -127,21 +157,15 @@ App = {
     event.preventDefault();
     let instance = App.contracts.TMS.instance;
     let value = $(".input-value-portfolio").val();
-    let data = await instance.methods.PortfolioValue(value).call();
-    console.log(data);
-    find(".Portfoliovalue").text(data);
-
-  },
-
-  allocate: async function (event) {
-    event.preventDefault();
-    let instance = App.contracts.TMS.instance;
-    let value = $(".input-value-IPO").val();
-    await instance.methods.allocate(value).call();
 
 
+    // console.log(await instance.methods.PortfolioValue(value).call());
 
-  },
+    $(".Portfoliovalue").text(await instance.methods.PortfolioValue(value).call());
+
+  }
+
+
 
 
 

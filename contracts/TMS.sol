@@ -39,13 +39,13 @@ contract NEPSETMS {
     
 
 
-    constructor(string memory stock_name, string memory _url, uint256 totalshares,uint256 SHARE_PRICE) public
+    constructor() public
     {
         owner = msg.sender;
-        myEvent.stock_name = stock_name;
-        myEvent.website = _url;
-        myEvent.totalshares = totalshares;
-        myEvent.SHARE_PRICE = SHARE_PRICE;
+        myEvent.stock_name = "NLIC";
+        myEvent.website = "www.NLIC.com";
+        myEvent.totalshares = 1000000;
+        myEvent.SHARE_PRICE = 1;
         myEvent.isOpen = true;
         
     }
@@ -70,7 +70,7 @@ contract NEPSETMS {
     function PortfolioValue(address ad)
         public
         view
-        returns(uint Value)
+        returns(uint256 Value)
     {
         
         Value = myEvent.SHARE_PRICE * myEvent.portfolio[ad];
@@ -79,11 +79,17 @@ contract NEPSETMS {
 
     }
 
-     function sharecount(address ad)
+    function Allocate(address ad) public payable returns(address)
+    {
+            return ad;
+    }
+
+
+    function sharecount(address ad)
         public
         view
         returns(uint)
-    {
+        {
 
         return (myEvent.portfolio[ad]);
 
@@ -91,43 +97,53 @@ contract NEPSETMS {
     
 
     
-     function buyShares(uint256 _share) public payable returns (bool) {
+    function buyShares(uint256 _share) public payable returns (bool) {
         require(myEvent.isOpen == true, "Sorry,Time is not for transaction");
         uint256 amount = _share * myEvent.SHARE_PRICE;
         require(msg.value >= amount, "Amount not sufficient");
-        myEvent.portfolio[msg.sender] += _share;
+        myEvent.portfolio[tx.origin] += _share;
         myEvent.sales += _share;
         myEvent.totalbuy += _share;
 
         if (msg.value > amount) {
             uint256 surplus = msg.value - amount;
-            msg.sender.transfer(surplus);
+            tx.origin.transfer(surplus);
         }
 
-        emit LogBuyers(msg.sender, _share);
+        emit LogBuyers(tx.origin, _share);
+        return true;
+    }
+
+    function IPO(address IP) 
+        public 
+        payable 
+        returns (bool)
+    {
+        require(owner == msg.sender, "Required to be an owner");
+        myEvent.portfolio[IP] = 10;
         return true;
     }
     
-    function sellShares(uint256 _share) public payable returns (string memory) {
+    function sellShares(uint256 _share) public payable returns (bool) {
         require(myEvent.isOpen == true, "Sorry,Time is not for transaction");
         uint256 amount = _share * myEvent.SHARE_PRICE;
-        myEvent.portfolio[msg.sender] -= _share;
+        myEvent.portfolio[tx.origin] -= _share;
         myEvent.sales += _share;
         myEvent.totalsell += _share;
         msg.sender.transfer(amount);
-        emit LogSellers(msg.sender, _share);
-        return ("Shares purchased");
+        emit LogSellers(tx.origin, _share);
+        return true;
     }
+
     
-    function allocate(address IPO) public payable returns(string memory){
-        require(owner == msg.sender, "Required to be an owner");
-        myEvent.portfolio[IPO] = 10;
-        }
+
+
 
 
 
 
     function SEBON() public OnlyOwner payable returns (string memory) {
+
         require(owner == msg.sender, "Required to be an owner");
         myEvent.isOpen = false;
         //owner.transfer(myEvent.sales * myEvent.SHARE_PRICE);
