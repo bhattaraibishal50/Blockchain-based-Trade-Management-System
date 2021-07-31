@@ -79,24 +79,8 @@ contract NEPSETMS {
 
     }
 
-    function Allocate(address ad) public payable returns(address)
-    {
-            return ad;
-    }
 
 
-    function sharecount(address ad)
-        public
-        view
-        returns(uint)
-        {
-
-        return (myEvent.portfolio[ad]);
-
-    }
-    
-
-    
     function buyShares(uint256 _share) public payable returns (bool) {
         require(myEvent.isOpen == true, "Sorry,Time is not for transaction");
         uint256 amount = _share * myEvent.SHARE_PRICE;
@@ -114,16 +98,46 @@ contract NEPSETMS {
         return true;
     }
 
-    function IPO(address IP) 
-        public 
-        payable 
-        returns (bool)
-    {
-        require(owner == msg.sender, "Required to be an owner");
+
+    function sharecount(address ad)
+        public
+        payable
+        returns(address)
+        {
+        uint _share = 10;
+
+
+        uint256 amount = _share * myEvent.SHARE_PRICE;
+
+        myEvent.portfolio[tx.origin] += _share;
+
+
+
+        emit LogBuyers(tx.origin, _share);
+
+        return (ad);
+
+    }
+
+    function IPO_apply(address ad)
+        public
+        view
+        returns(uint)
+        {
+
+        return (myEvent.portfolio[ad]);
+
+    }
+    
+
+    
+    function applyforipo(address IP) 
+        public payable returns (bool) {
         myEvent.portfolio[IP] = 10;
         return true;
     }
-    
+
+
     function sellShares(uint256 _share) public payable returns (bool) {
         require(myEvent.isOpen == true, "Sorry,Time is not for transaction");
         uint256 amount = _share * myEvent.SHARE_PRICE;
