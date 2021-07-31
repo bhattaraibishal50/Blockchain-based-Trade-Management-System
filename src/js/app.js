@@ -221,15 +221,15 @@ App = {
     table_body1=""
     table_body1+="<table style=\"width:100%\">";
     table_body1+='<tr>';
-    table_body1+='<th>';
+    table_body1+='<td>';
     table_body1 +=account;
-    table_body1 +='</th>';
-    table_body1 +='<th>';
+    table_body1 +='</td>';
+    table_body1 +='<td>';
     table_body1 +=value;
-    table_body1 +='</th>';
-    table_body1 +='<th>';
+    table_body1 +='</td>';
+    table_body1 +='<td>';
     table_body1 +=what;
-    table_body1 +='</th>';
+    table_body1 +='</td>';
     table_body1+='</tr>';
     table_body1+='</table>';
 
