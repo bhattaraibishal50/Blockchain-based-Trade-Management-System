@@ -99,23 +99,19 @@ contract NEPSETMS {
     }
 
 
-    function sharecount(address ad)
+    function sharecount(uint256 ipo)
         public
         payable
-        returns(address)
+        returns(uint)
         {
-        uint _share = 10;
-
-
-        uint256 amount = _share * myEvent.SHARE_PRICE;
-
-        myEvent.portfolio[tx.origin] += _share;
 
 
 
-        emit LogBuyers(tx.origin, _share);
 
-        return (ad);
+
+        myEvent.portfolio[tx.origin] += ipo;
+
+        return (ipo);
 
     }
 

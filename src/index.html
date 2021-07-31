@@ -36,10 +36,21 @@
 border: 2px solid #000000;
 border-radius: 4px;
 }
+.button-floorsheet{
+  background-color: #1a1aff;
+  color:#ffffff;
+}
+.button-suspectful{
+  color:#ff1a1a;
+}
+.floorsheet{
+  color:#800080;
+}
 </style>
 <body>
+
   <center>
-  <img src="unnamed.png" alt="NEPSE TMS">
+  <img src="unnamed.png" alt="NEPSE TMS" height="250" width="250">
   </center>
   <div class="container">
     <div class="row">
@@ -84,6 +95,7 @@ border-radius: 4px;
 
             </button>
           </div>
+
         </div>
       </div>
     </div>
@@ -130,15 +142,37 @@ border-radius: 4px;
   </div>
   <br />
   <hr />
-  <br />
+  <h3 class='floorsheet'><center>Floorsheet</center></h3>
+  <table style="width:80%">
+    <tr>
+    <th>Address</th>
+    <th>Transaction Amount</th>
+    <th>Buy/Sell</th>
 
+  </tr>
+  <br />
+  
+  </table>
+  <span class="table_un"></span>
+
+
+  <br />
+      <hr />
   <center>
-    <button type="button" class="button-sebon">
-      SEBON
-    </button>
+<h3><span class="button-suspectful">Suspectful Trades</span></h3>
   </center>
+  <table style="width:80%">
+    <tr>
+    <th>Address</th>
+    <th>Transaction Amount</th>
+    <th>Buy/Sell</th>
 
+  </tr>
   <br />
+  
+  </table>
+  <span class="table_un1"></span>
+
   
 
   

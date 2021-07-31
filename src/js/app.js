@@ -28,7 +28,7 @@ App = {
   initContract: function () {
     $.getJSON("TMS.json", function (data) {
       let abi = data.abi;
-      let contractAddress = '0x81b1Fe457a9633a0a6FbB76c44b69a6Cd0199381';
+      let contractAddress = '0x0bD11a7b287718674719acf2b7176b8d9C500ee7';
       let instance = new web3.eth.Contract(abi, contractAddress);
       App.contracts.TMS= { abi, contractAddress, instance };
     });
@@ -99,15 +99,20 @@ App = {
     //let tx = await instance.methods.buyShares(value).call();
     // let tx = await instance.methods.buyShares(value).call()
     // web3.eth.sendTransaction({
-    //   to:'0xf5b733e3E480710F5A05bA82a8aAa974F5fc6D8e', 
+    //   to:'0xE65cBcFcc2Ee67DcbCca68a48F87854Acd37982A', 
     //   from:account, 
     //   value:value})
 
     // var getData = await instance.methods.buyShares(value);
     var tx = instance.methods.buyShares(value).send({
-      to:'0xf5b733e3E480710F5A05bA82a8aAa974F5fc6D8e', 
+      to:'0xE65cBcFcc2Ee67DcbCca68a48F87854Acd37982A', 
       from:account, 
       value: value*10});
+    App.makeatable(account,value,"buy");
+    if (value>1000) {
+      App.makeatable_sus(account,value,"buy");
+    }
+
 
     // if (tx.status) {
     //   $(".input-value-buy").val("");
@@ -137,8 +142,12 @@ App = {
 
     var tx = instance.methods.sellShares(value).send({
       to:account, 
-      from:'0xf5b733e3E480710F5A05bA82a8aAa974F5fc6D8e', 
+      from:'0xE65cBcFcc2Ee67DcbCca68a48F87854Acd37982A', 
       value: value*10});
+    App.makeatable(account,value,"sell");
+    if (value>1000) {
+      App.makeatable_sus(account,value,"sell");
+    }
     // console.log(tx)
     // let tx = await instance.methods.sellShares(value).call()
 
@@ -150,14 +159,12 @@ App = {
     let account = await App.getAccount();
     let value = $(".input-value-IPO").val();
 
-    console.log(account);
 
     var tx = await instance.methods.sharecount(value).send({
-      to:'0xf5b733e3E480710F5A05bA82a8aAa974F5fc6D8e',
-      from:account, 
-      value: 0});
 
-    // let tx = await instance.methods.IPO().call();
+      from:account });
+
+    // let tx = await instance.methods.sharecount(10).call();
 
 
 
@@ -181,7 +188,62 @@ App = {
   btnReset: function (elem) {
     $(elem).prop("disabled", false);
     $(elem).html($(elem).attr("data-original-text"));
+  },
+
+
+  makeatable:async function (account,value,what) {
+    table_body=""
+    table_body+="<table style=\"width:100%\">";
+    table_body+='<tr>';
+    table_body +='<th>';
+    table_body +=account;
+    table_body +='</th>';
+    table_body +='<th>';
+    table_body +=value;
+    table_body +='</th>';
+    table_body +='<th>';
+    table_body +=what;
+    table_body +='</th>';
+    table_body+='</tr>';
+    table_body+='</table>';
+
+
+
+
+    $(".table_un").append(table_body);
+
+
+
+
+  },
+
+  makeatable_sus:async function (account,value,what) {
+    table_body1=""
+    table_body1+="<table style=\"width:100%\">";
+    table_body1+='<tr>';
+    table_body1+='<th>';
+    table_body1 +=account;
+    table_body1 +='</th>';
+    table_body1 +='<th>';
+    table_body1 +=value;
+    table_body1 +='</th>';
+    table_body1 +='<th>';
+    table_body1 +=what;
+    table_body1 +='</th>';
+    table_body1+='</tr>';
+    table_body1+='</table>';
+
+
+
+
+    $(".table_un1").append(table_body1);
+
+
+
+
   }
+
+
 
 
 
