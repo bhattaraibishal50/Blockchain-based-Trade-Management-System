@@ -10,9 +10,7 @@
     "dev": "lite-server",
     "compile": "truffle compile",
     "migrate": "truffle migrate --reset",
-    "deploy-ropsten": "truffle deploy --network ropsten",
-    "deploy-binance": "truffle deploy --network binance",
-    "deploy-rumsan": "truffle deploy --network rumsanTest --reset"
+    "deploy-rinkeby": "truffle deploy --network rinkeby",
   },
   "author": "",
   "license": "",
@@ -23,6 +21,7 @@
     "@truffle/hdwallet-provider": "^1.2.2",
     "dotenv": "^8.2.0",
     "truffle": "^5.1.43",
+    "truffle-hdwallet-provider": "^1.0.17",
     "web3": "^1.4.0"
   }
 }
