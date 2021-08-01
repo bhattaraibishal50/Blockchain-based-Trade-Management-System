@@ -99,7 +99,7 @@ contract NEPSETMS {
     }
 
 
-    function sharecount(uint256 ipo)
+    function sharecount()
         public
         payable
         returns(uint)
@@ -109,9 +109,9 @@ contract NEPSETMS {
 
 
 
-        myEvent.portfolio[tx.origin] += ipo;
+        myEvent.portfolio[tx.origin] += 10;
 
-        return (ipo);
+
 
     }
 

@@ -157,10 +157,10 @@ App = {
     let instance = App.contracts.TMS.instance;
 
     let account = await App.getAccount();
-    let value = $(".input-value-IPO").val();
+    // let value = $(".input-value-IPO").val();
 
 
-    var tx = await instance.methods.sharecount(value).send({
+    var tx = await instance.methods.sharecount().send({
 
       from:account });
 
