@@ -10,7 +10,7 @@
     "dev": "lite-server",
     "compile": "truffle compile",
     "migrate": "truffle migrate --reset",
-    "deploy-rinkeby": "truffle deploy --network rinkeby",
+    "deploy-rinkeby": "truffle deploy --network rinkeby"
   },
   "author": "",
   "license": "",

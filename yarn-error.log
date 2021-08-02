@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/bin/node /usr/local/bin/yarn add web3-util@1.3.3
+  /usr/bin/node /usr/local/bin/yarn dev
 
 PATH: 
   /home/kalyan/anaconda3/bin:/home/kalyan/anaconda3/condabin:/home/kalyan/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
@@ -14,17 +14,12 @@ Platform:
   linux x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/web3-util: Not found
-      at Request.params.callback [as _callback] (/usr/local/lib/node_modules/yarn/lib/cli.js:66988:18)
-      at Request.self.callback (/usr/local/lib/node_modules/yarn/lib/cli.js:140662:22)
-      at Request.emit (events.js:198:13)
-      at Request.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:141634:10)
-      at Request.emit (events.js:198:13)
-      at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:141556:12)
-      at Object.onceWrapper (events.js:286:20)
-      at IncomingMessage.emit (events.js:203:15)
-      at endReadableNT (_stream_readable.js:1145:12)
-      at process._tickCallback (internal/process/next_tick.js:63:19)
+  SyntaxError: /home/kalyan/Desktop/Blockchain-Aided-TMS/package.json: Unexpected token } in JSON at position 312
+      at JSON.parse (<anonymous>)
+      at /usr/local/lib/node_modules/yarn/lib/cli.js:1625:59
+      at Generator.next (<anonymous>)
+      at step (/usr/local/lib/node_modules/yarn/lib/cli.js:310:30)
+      at /usr/local/lib/node_modules/yarn/lib/cli.js:321:13
 
 npm manifest: 
   {
@@ -39,9 +34,7 @@ npm manifest:
       "dev": "lite-server",
       "compile": "truffle compile",
       "migrate": "truffle migrate --reset",
-      "deploy-ropsten": "truffle deploy --network ropsten",
-      "deploy-binance": "truffle deploy --network binance",
-      "deploy-rumsan": "truffle deploy --network rumsanTest --reset"
+      "deploy-rinkeby": "truffle deploy --network rinkeby",
     },
     "author": "",
     "license": "",
@@ -52,6 +45,7 @@ npm manifest:
       "@truffle/hdwallet-provider": "^1.2.2",
       "dotenv": "^8.2.0",
       "truffle": "^5.1.43",
+      "truffle-hdwallet-provider": "^1.0.17",
       "web3": "^1.4.0"
     }
   }

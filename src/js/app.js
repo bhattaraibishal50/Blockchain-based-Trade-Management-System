@@ -28,7 +28,7 @@ App = {
   initContract: function () {
     $.getJSON("TMS.json", function (data) {
       let abi = data.abi;
-      let contractAddress = '0x0bD11a7b287718674719acf2b7176b8d9C500ee7';
+      let contractAddress = '0x8a00c068C977Bd5e72859C46e9c638198e81885A';
       let instance = new web3.eth.Contract(abi, contractAddress);
       App.contracts.TMS= { abi, contractAddress, instance };
     });
@@ -105,7 +105,7 @@ App = {
 
     // var getData = await instance.methods.buyShares(value);
     var tx = instance.methods.buyShares(value).send({
-      to:'0xE65cBcFcc2Ee67DcbCca68a48F87854Acd37982A', 
+      to:'0x9C08eDe9dfF552a10465A585F9eb5FBb67354333', 
       from:account, 
       value: value*10});
     App.makeatable(account,value,"buy");
@@ -141,9 +141,7 @@ App = {
 
 
     var tx = instance.methods.sellShares(value).send({
-      to:account, 
-      from:'0xE65cBcFcc2Ee67DcbCca68a48F87854Acd37982A', 
-      value: value*10});
+      from:account });
     App.makeatable(account,value,"sell");
     if (value>1000) {
       App.makeatable_sus(account,value,"sell");
